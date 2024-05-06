@@ -45,3 +45,26 @@ def test_flask_logger(capsys):
 
     check_logger = app.config.get(StructuredLogging.MODULE_NAME)
     assert isinstance(check_logger, StructuredLogging)
+
+
+def test_flask_no_init_logger(capsys):
+    """Assure logger works in Flask."""
+    app = Flask(__name__)
+    app.config['STRUCTURED_LOG_LEVEL'] = 'WARNING'
+    slog = StructuredLogging()
+
+    msg = 'A warning message in the log.'
+
+    StructuredLogging.get_logger().warn(msg)
+
+    captured = capsys.readouterr()
+    assert msg in captured.out
+    assert 'warn' in captured.out
+
+    json_out = json.loads(captured.out)
+    assert isinstance(json_out, dict)
+    assert json_out['severity'] == 'warning'
+    assert json_out['message'] == msg   
+
+    check_logger = app.config.get(StructuredLogging.MODULE_NAME)
+    assert not check_logger

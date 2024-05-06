@@ -40,6 +40,7 @@ from logging import Logger
 from typing import Final
 
 from flask import Flask
+from flask import current_app
 from flask.logging import default_handler
 
 import structlog
@@ -76,6 +77,15 @@ class StructuredLogging:
                logger = getJSONLogger()
             self.logger = logger
         return self.logger 
+
+    @staticmethod
+    def get_logger() -> Logger.logger:
+        """Get or create the logger and return it."""
+        if not (app := current_app) \
+           or not (logger := app.config.get(StructuredLogging.MODULE_NAME)):
+               logger = getJSONLogger()
+
+        return logger 
 
 
 # Adapted from the stdlib
