@@ -42,3 +42,6 @@ def test_flask_logger(capsys):
     assert isinstance(json_out, dict)
     assert json_out['severity'] == 'warning'
     assert json_out['message'] == msg   
+
+    check_logger = app.config.get(StructuredLogging.MODULE_NAME)
+    assert isinstance(check_logger, StructuredLogging)

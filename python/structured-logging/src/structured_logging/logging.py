@@ -37,6 +37,7 @@ This is targeted for our GCP based services.
 """
 from __future__ import annotations
 from logging import Logger
+from typing import Final
 
 from flask import Flask
 from flask.logging import default_handler
@@ -46,6 +47,8 @@ import structlog
 
 class StructuredLogging:
     """SBC Connect structured logging library"""
+
+    MODULE_NAME: Final = 'SBC-CONNECT-STRUCTURED-LOGGING'
 
     def __init__(self, app: Flask = None) -> StructuredLogging:
         """Create the object."""
@@ -59,6 +62,7 @@ class StructuredLogging:
     def init_app(self, app: Flask) -> StructuredLogging:
         """Initialize the logger."""
         self.app = app
+        self.app.config[self.MODULE_NAME] = self
         structlog.stdlib.recreate_defaults(log_level=self.log_level)
         log_level = app.config.get('STRUCTURED_LOG_LEVEL', 'NOTSET')
         self.log_level = _NAME_TO_LEVEL[log_level.lower()]
@@ -67,7 +71,10 @@ class StructuredLogging:
     def get_logger(self) -> Logger.logger:
         """Get or create the logger and return it."""
         if not self.logger:
-           self.logger = getJSONLogger()
+            if not self.app \
+              or (logger := self.app.config.get(self.MODULE_NAME)):
+               logger = getJSONLogger()
+            self.logger = logger
         return self.logger 
 
 
