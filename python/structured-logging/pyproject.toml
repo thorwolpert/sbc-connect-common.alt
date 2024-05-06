@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "structured-logging"
-version = "0.2.0"
+version = "0.3.0"
 description = ""
 authors = ["thorwolpert <thor@wolpert.ca>"]
 readme = "README.md"
