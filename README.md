@@ -19,7 +19,7 @@ gcloud init
 ```
 
 ```bash
-export SBC_CONNECT_PYTHON_REPO_URL="https://northamerica-northeast1-python.pkg.dev/c4hnrd-tools/python/"
+export SBC_CONNECT_PYTHON_REPO_URL="https://northamerica-northeast1-python.pkg.dev/c4hnrd-tools/python/simple/"
 poetry config repositories.sbc-connect $SBC_CONNECT_PYTHON_REPO_URL
 poetry source add --priority=explicit sbc-connect $SBC_CONNECT_PYTHON_REPO_URL
 poetry add --source sbc-connect gcp-queue
