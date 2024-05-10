@@ -10,9 +10,9 @@
 
 ## Installing
 ### Required roles:
-roles/artifactregistry.reader: All developers
-roles/artifactregistry.writer: CI/CD and Leads.
-roles/artifactregistry.repoAdmin: SRE
+- roles/artifactregistry.reader: All developers
+- roles/artifactregistry.writer: CI/CD and Leads.
+- roles/artifactregistry.repoAdmin: SRE
 ### setup repo
 ```bash
 gcloud init
