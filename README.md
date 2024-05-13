@@ -17,7 +17,11 @@
 ```bash
 gcloud init
 ```
-
+Get your default credentials in place
+```bash
+gcloud auth application-default login
+```
+Register the python artifact repo as _sbc-connect_
 ```bash
 export SBC_CONNECT_PYTHON_REPO_URL="https://northamerica-northeast1-python.pkg.dev/c4hnrd-tools/python/simple/"
 poetry config repositories.sbc-connect $SBC_CONNECT_PYTHON_REPO_URL
