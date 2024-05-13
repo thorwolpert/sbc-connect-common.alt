@@ -31,7 +31,6 @@ Install the dependencies
 poetry install
 ```
 
-Configure the .env
 
 ## How to Contribute
 
