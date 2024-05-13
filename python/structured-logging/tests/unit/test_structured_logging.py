@@ -64,7 +64,7 @@ def test_flask_no_init_logger(capsys):
     json_out = json.loads(captured.out)
     assert isinstance(json_out, dict)
     assert json_out['severity'] == 'warning'
-    assert json_out['message'] == msg   
+    assert json_out['message'] == msg
 
     check_logger = app.config.get(StructuredLogging.MODULE_NAME)
     assert not check_logger
